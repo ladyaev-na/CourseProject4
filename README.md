@@ -2,7 +2,7 @@
 1. Склонируйте репозиторий
 ```shell
 cd domains
-git clone https://github.com/ladyaev-na/samokat.git
+git clone https://github.com/ladyaev-na/CurseProject4.git
 ```
 2. Перейдите в папку с проектом и установите composer-зависимости
 ```shell
