@@ -41,7 +41,10 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->api_token = Hash::make(Str::random(60));
         $user->save();
-        return response()->json(['token' => $user->api_token])->setStatusCode(200);
+        return response()->json([
+            'token' => $user->api_token,
+            'user' => new UserResource($user),
+        ])->setStatusCode(200);
     }
 
     public function logout(){
