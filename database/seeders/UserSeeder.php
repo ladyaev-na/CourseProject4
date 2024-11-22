@@ -18,9 +18,10 @@ class UserSeeder extends Seeder
             'password' => 'QWEqwe123@',
             'api_token' => null,
             'role_id' => 1,
+            'fine_id' => 1,
         ]);
 
-        User::create([
+        /*User::create([
             'surname' => 'Ладяев',
             'name' => 'Никита',
             'patronymic' => 'Александрович',
@@ -29,5 +30,76 @@ class UserSeeder extends Seeder
             'api_token' => null,
             'role_id' => 2,
         ]);
+
+        User::create([
+            'surname' => 'Иванов',
+            'name' => 'Иван',
+            'patronymic' => 'Иванович',
+            'login' => 'Ivanov',
+            'password' => 'Qwerty123!',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);
+
+        User::create([
+            'surname' => 'Петров',
+            'name' => 'Петр',
+            'patronymic' => 'Петрович',
+            'login' => 'Petrov',
+            'password' => 'PetrP@ssw0rd',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);
+
+        User::create([
+            'surname' => 'Сидорова',
+            'name' => 'Анна',
+            'patronymic' => 'Александровна',
+            'login' => 'AnnaS',
+            'password' => 'AnnaS123#',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);
+
+        User::create([
+            'surname' => 'Кузнецов',
+            'name' => 'Дмитрий',
+            'patronymic' => 'Дмитриевич',
+            'login' => 'DmitryK',
+            'password' => 'DmitryK@123',
+            'api_token' => null,
+            'role_id' => 3,
+
+        ]);
+
+        User::create([
+            'surname' => 'Смирнова',
+            'name' => 'Елена',
+            'patronymic' => 'Ивановна',
+            'login' => 'ElenaS',
+            'password' => 'ElenaS!23',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);
+
+        User::create([
+            'surname' => 'Федоров',
+            'name' => 'Алексей',
+            'patronymic' => 'Алексеевич',
+            'login' => 'AlexF',
+            'password' => 'AlexF#123',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);
+
+        User::create([
+            'surname' => 'Николаева',
+            'name' => 'Ольга',
+            'patronymic' => 'Николаевна',
+            'login' => 'OlgaN',
+            'password' => 'OlgaN@123',
+            'api_token' => null,
+            'role_id' => 3,
+        ]);*/
     }
 }

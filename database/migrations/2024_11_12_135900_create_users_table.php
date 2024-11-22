@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('password',64);
             $table->string('api_token')->nullable()->unique();
             $table->foreignId('role_id')->constrained();
+            $table->foreignId('fine_id')->constrained();
+            $table->foreignId('status_id')->constrained();
+            $table->foreignId('shift_id')->constrained();
+            $table->foreignId('access_id')->constrained();
             $table->timestamps();
         });
     }

@@ -12,7 +12,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'surname','name','patronymic','login','password','api_token','role_id'
+        'surname','name','patronymic','login','password','api_token','role_id','fine_id'
     ];
 
 
@@ -31,5 +31,9 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+    public function fine()
+    {
+        return $this->belongsTo(Fine::class);
     }
 }

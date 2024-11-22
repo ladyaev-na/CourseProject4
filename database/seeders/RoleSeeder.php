@@ -19,5 +19,10 @@ class RoleSeeder extends Seeder
             'name' => 'Курьер',
             'code' => 'сourier',
         ]);
+
+        Role::create([
+            'name' => 'Координатор',
+            'code' => 'coordinator',
+        ]);
     }
 }
