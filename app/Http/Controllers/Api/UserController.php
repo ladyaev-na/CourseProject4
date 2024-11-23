@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function profileReedAll(){
+        $user = User::all();
+        return $user;
+    }
     public function profileRead($id)
     {
         $user = User::find($id);

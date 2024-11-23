@@ -12,6 +12,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 
 
 // Профиль
+Route::get('/profile',[UserController::class, 'profileReedAll']);
 Route::get('/profile/{id}',[UserController::class, 'profileRead']);
 Route::post('/profile/{id}',[UserController::class, 'profileUpdate']);
 
