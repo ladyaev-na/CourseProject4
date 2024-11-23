@@ -12,9 +12,13 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 
 
 // Профиль
-Route::get('/profile',[UserController::class, 'profileReedAll']);
+
+/*Route::get('/profile',[UserController::class, 'profileReedAll']);
 Route::get('/profile/{id}',[UserController::class, 'profileRead']);
-Route::post('/profile/{id}',[UserController::class, 'profileUpdate']);
+Route::post('/profile/{id}',[UserController::class, 'profileUpdate']);*/
+
+Route::middleware('auth:api')->apiResource('profile',UserController::class);
+Route::post('/profile/{id}',[UserController::class,'update']);
 
 
 // Штрафы
