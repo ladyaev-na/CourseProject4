@@ -21,6 +21,10 @@ Route::post('/profile/{id}',[UserController::class, 'profileUpdate']); // Ред
 Route::get('/bonuses', [BonusController::class, 'index']); // Просмотр всех бонусов
 Route::get('/bonuses/{id}',[BonusController::class, 'bonusRead']); // Просмотр конкретного бонуса
 
+// Профиль
+Route::get('/profile',[UserController::class, 'profileReedAll']);
+Route::get('/profile/{id}',[UserController::class, 'profileRead']);
+Route::post('/profile/{id}',[UserController::class, 'profileUpdate']);
 
 // Функционал администратора
 Route::middleware('admin')->group(function () {

@@ -19,6 +19,9 @@ class UserSeeder extends Seeder
             'api_token' => null,
             'role_id' => 1,
             'fine_id' => 1,
+            'status_id' => 1,
+            'shift_id' => 1,
+            'access_id' => 1,
         ]);
 
         /*User::create([
