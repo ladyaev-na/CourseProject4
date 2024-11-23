@@ -36,4 +36,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Fine::class);
     }
+    public function access()
+    {
+        return $this->belongsTo(Access::class);
+    }
+    public function shift()
+    {
+        return $this->belongsTo(Shift::class);
+    }
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }
