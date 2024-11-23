@@ -17,4 +17,9 @@ class UpdateFineRequest extends ApiRequest
             'description' => 'string|max:255',
         ];
     }
+    public function messages(): array{
+        return [
+            'description.max' => 'Поле "описание" должно содержать максимум 255 символов',
+        ];
+    }
 }

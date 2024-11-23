@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('accesses', function (Blueprint $table) {
             $table->id();
-            $table->dateTime('startChange');
-            $table->dateTime('endChange');
+            $table->time('startChange');
+            $table->time('endChange');
             $table->timestamps();
         });
     }

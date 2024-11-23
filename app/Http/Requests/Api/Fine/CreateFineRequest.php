@@ -19,7 +19,8 @@ class CreateFineRequest extends ApiRequest
     }
     public function messages(): array{
         return [
-            'description.required' => 'Поле "описаине" обязательно для заполнения.',
+            'description.required' => 'Поле "описание" обязательно для заполнения.',
+            'description.max' => 'Поле "описание" должно содержать максимум 255 символов',
         ];
     }
 }

@@ -2,22 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\Fine;
+use App\Models\Access;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class FineSeeder extends Seeder
+class AccessSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Fine::create([
-            'description' => 'Без штрафов'
-        ]);
-        Fine::create([
-            'description' => 'Отстранение'
+        Access::create([
+            'startChange' => '08:00:00',
+            'endChange' => '23:00:00'
         ]);
     }
 }
