@@ -1,24 +1,34 @@
 <?php
 
+use App\Http\Controllers\Api\StatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\FineController;
+use App\Http\Controllers\Api\ShiftController;
+use App\Http\Controllers\Api\AccesseController;
 /*use App\Http\Controllers\Api\BonusController;*/
+
+
 
 
 // Профиль
 Route::middleware('auth:api')->apiResource('profile',UserController::class);
 // Штрафы
 Route::middleware('auth:api')->apiResource('fine',FineController::class);
+// Статусы
+Route::middleware('auth:api')->apiResource('status',StatusController::class);
+// Доступность
+Route::middleware('auth:api')->apiResource('accesses', AccesseController::class); //Доработать
+// Смена
+Route::middleware('auth:api')->apiResource('shift',ShiftController::class); //Доработать
+
 
 
 
 // Функционал неавторизированного пользователя
 Route::post('/login', [AuthController::class, 'login']); // Авторизация
-
-
 // Функционал авторизированного пользователя
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'); // Выход
 
