@@ -27,7 +27,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 Route::get('/bonuses/{id}',[BonusController::class, 'bonusRead']); // Просмотр конкретного бонуса*/
 
 
-
 // Функционал администратора
 Route::middleware('admin')->group(function () {
     Route::post('/register', [AuthController::class, 'register']); // Регистрация

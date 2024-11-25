@@ -13,7 +13,7 @@ class ApiRole
     {
         if (!$request->user()->hasRole(explode('|',$roles))){
 
-            throw new ApiException(403,'оступ запрещен');
+            throw new ApiException(403,'Доступ запрещен');
         }
         return $next($request);
     }

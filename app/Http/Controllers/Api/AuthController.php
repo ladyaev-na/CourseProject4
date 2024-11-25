@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
-use App\Http\Resources\Api\UserResource;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -35,7 +34,7 @@ class AuthController extends Controller
     public function login(Request $request){
 
         if (!Auth::attempt($request->only('login', 'password'))) {
-            throw new ApiException("Не верный логин/пароль",401);
+            throw new ApiException("Неверный логин/пароль",401);
         }
 
         $user = Auth::user();
@@ -43,7 +42,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json([
             'token' => $user->api_token,
-            'user' => new UserResource($user),
+            'user' => $user,
         ])->setStatusCode(200);
     }
 
