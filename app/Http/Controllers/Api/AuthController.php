@@ -43,7 +43,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json([
             'token' => $user->api_token,
-            'user' => new UserResource($user),
+            'user' => $user,
         ])->setStatusCode(200);
     }
 
