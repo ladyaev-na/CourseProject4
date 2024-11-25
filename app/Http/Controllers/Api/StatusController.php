@@ -35,7 +35,7 @@ class StatusController extends Controller
             return response()->json('Статус не найден')->setStatusCode(404, 'Не найдено');
         }
     }
-    public function update(UpdateStatusRequest $request, string $id)
+    public function update(UpdateStatusRequest $request, $id)
     {
         $status = Status::find($id);
 
