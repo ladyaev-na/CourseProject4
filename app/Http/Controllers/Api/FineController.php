@@ -54,6 +54,6 @@ class FineController extends Controller
             throw new ApiException(404,'Not Found');
         }
         $fine->delete();
-        return response()->json('Пользователь удален')->setStatusCode(200);
+        return response()->json('зкщашдь удален')->setStatusCode(200);
     }
 }
