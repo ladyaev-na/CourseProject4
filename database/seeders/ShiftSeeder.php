@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Shift;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,9 @@ class ShiftSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Shift::create([
+            'estimation' => 1,
+            'order' => 1,
+        ]);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Api\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,19 +11,18 @@ class UserController extends Controller
 {
     public function index(){
         $users = User::all();
-        return response()->json(UserResource::collection($users))->setStatusCode(200,'Ок');
+        return response()->json($users)->setStatusCode(200,'Ок');
     }
     public function show($id)
     {
         $user = User::find($id);
         if ($user){
-            return response()->json(new UserResource($user))->setStatusCode(200, 'Успешно');
+            return response()->json($user)->setStatusCode(200, 'Успешно');
         }else{
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
     }
-
-    public function update(Request $request, $id){
+    public function update(Request $request, $id, User $user){
 
         $user = User::find($id);
 
@@ -33,5 +32,14 @@ class UserController extends Controller
         }else{
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
+    }
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user){
+            throw new ApiException(404,'Not Found');
+        }
+        $user->delete();
+        return response()->json('зкщашдь удален')->setStatusCode(200);
     }
 }

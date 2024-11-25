@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         // Регистрируем Middleware
-        $middleware->route('admin', AdminMiddleware::class);
+       /* $middleware->route('admin', AdminMiddleware::class);*/
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
