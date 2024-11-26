@@ -22,8 +22,6 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained();
             $table->foreignId('fine_id')->constrained();
             $table->foreignId('status_id')->constrained();
-            $table->foreignId('shift_id')->constrained();
-            $table->foreignId('access_id')->constrained();
             $table->timestamps();
         });
     }

@@ -13,39 +13,47 @@ class BonusController extends Controller
 {
     public function index()
     {
-        $bonuses = Bonus::all();
-        return response()->json($bonuses)->setStatusCode(200);
-    }
+        $bonus = Bonus::all();
 
-    public function bonusCreate(CreateBonusRequest $request)
+        if (!$bonus){
+            throw new ApiException(404,'Font Found');
+        }
+
+        return response()->json($bonus)->setStatusCode(200);
+    }
+    public function store(CreateBonusRequest $request)
     {
-        $bonus = Bonus::create($request->validated());
+        $bonus = new Bonus($request->all());
+        $bonus->save();
         return response()->json($bonus)->setStatusCode(201);
     }
-
-    public function bonusRead(Bonus $bonus)
+    public function show($id)
     {
-        if (empty($bonus->id)) {
-            throw new ApiException('Not Found', 404);
+        $bonus = Bonus::find($id);
+        if ($bonus){
+            return response()->json($bonus)->setStatusCode(200, 'Успешно');
+        }else{
+            return response()->json('Бонус не найден')->setStatusCode(404, 'Не найдено');
         }
-        return response()->json($bonus)->setStatusCode(200);
     }
-
-    public function bonusUpdate(UpdateBonusRequest $request, Bonus $bonus)
+    public function update(UpdateBonusRequest $request, $id)
     {
-        if (empty($bonus->id)) {
-            throw new ApiException('Not Found', 404);
+        $bonus = Bonus::find($id);
+
+        if ($bonus){
+            $bonus->update($request->all());
+            return response()->json($bonus)->setStatusCode(200, 'Успешно');
+        }else{
+            return response()->json('Бонус не найден')->setStatusCode(404, 'Не найдено');
         }
-        $bonus->update($request->validated());
-        return response()->json($bonus)->setStatusCode(200);
     }
-
-    public function bonusDelete(Bonus $bonus)
+    public function destroy($id)
     {
-        if (empty($bonus->id)) {
-            throw new ApiException('Not Found', 404);
+        $bonus = Bonus::find($id);
+        if (!$bonus){
+            throw new ApiException(404,'Not Found');
         }
         $bonus->delete();
-        return response()->json()->setStatusCode(204);
+        return response()->json('Бонус удален')->setStatusCode(200);
     }
 }

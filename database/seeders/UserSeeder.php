@@ -20,11 +20,9 @@ class UserSeeder extends Seeder
             'role_id' => 1,
             'fine_id' => 1,
             'status_id' => 1,
-            'shift_id' => 1,
-            'access_id' => 1,
         ]);
 
-        /*User::create([
+        User::create([
             'surname' => 'Ладяев',
             'name' => 'Никита',
             'patronymic' => 'Александрович',
@@ -32,8 +30,10 @@ class UserSeeder extends Seeder
             'password' => 'ASDasd123@',
             'api_token' => null,
             'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
-
+/*
         User::create([
             'surname' => 'Иванов',
             'name' => 'Иван',

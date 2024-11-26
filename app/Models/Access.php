@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model
 {
-    protected $fillable = ['startChange', 'endChange','date','confirm'];
+    protected $fillable = ['startChange', 'endChange','date','confirm','user_id'];
 
-    public function users(){
-        return $this->hasMany(User::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

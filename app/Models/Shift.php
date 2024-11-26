@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Shift extends Model
 {
-    protected $fillable = ['estimation', 'order'];
+    protected $fillable = ['estimation', 'order','user_id'];
 
     public function users(){
         return $this->hasMany(User::class);

@@ -15,8 +15,8 @@ class UpdateStatusRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|max:64|min:5|unique:statuses,name',
-            'code' => 'string|max:64|min:5|unique:statuses,code',
+            'name' => 'max:64|min:5|unique:statuses,name',
+            'code' => 'max:64|min:5|unique:statuses,code',
         ];
     }
     public function messages(): array

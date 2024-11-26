@@ -36,7 +36,7 @@ class FineController extends Controller
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
     }
-    public function update(UpdateFineRequest $request, Fine $fine, $id)
+    public function update(UpdateFineRequest $request, $id)
     {
         $fine = Fine::find($id);
 

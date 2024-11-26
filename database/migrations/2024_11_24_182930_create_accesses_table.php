@@ -14,6 +14,7 @@ return new class extends Migration
             $table->time('startChange');
             $table->time('endChange');
             $table->boolean('confirm')->default(false);
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

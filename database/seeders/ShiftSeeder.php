@@ -16,6 +16,7 @@ class ShiftSeeder extends Seeder
         Shift::create([
             'estimation' => 1,
             'order' => 1,
+            'user_id' => 2,
         ]);
     }
 }

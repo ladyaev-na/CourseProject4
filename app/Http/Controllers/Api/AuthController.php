@@ -6,6 +6,7 @@ use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
 use App\Models\Role;
+use App\Models\Status;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -25,8 +26,8 @@ class AuthController extends Controller
 
         return response()->json(
             [
-                 'user' => new UserResource($user),
-                 'token' => $user->api_token,
+                'user' => $user,
+                'token' => $user->api_token,
             ]
         )->setStatusCode(201);
     }

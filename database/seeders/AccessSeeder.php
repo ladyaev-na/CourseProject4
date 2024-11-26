@@ -14,10 +14,11 @@ class AccessSeeder extends Seeder
     public function run(): void
     {
         Access::create([
-            'data' => '2023-10-01',
+            'date' => '2023-10-01',
             'startChange' => '08:00:00',
             'endChange' => '23:00:00',
             'confirm' => false,
+            'user_id' => 1
         ]);
     }
 }

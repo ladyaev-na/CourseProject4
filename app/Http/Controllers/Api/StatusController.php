@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Exceptions\Api\ApiException;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\Status\CreateStatusRequest;
 use App\Http\Requests\Api\Status\UpdateStatusRequest;
 use App\Models\Status;
+use Illuminate\Support\Facades\Gate;
+
 
 class StatusController extends Controller
 {
@@ -37,6 +39,7 @@ class StatusController extends Controller
     }
     public function update(UpdateStatusRequest $request, $id)
     {
+
         $status = Status::find($id);
 
         if ($status){
