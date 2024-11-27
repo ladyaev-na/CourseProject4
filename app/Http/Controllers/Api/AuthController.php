@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Models\Fine;
 use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -15,11 +18,27 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    use AuthorizesRequests;
+
     public function register(RegisterRequest $request)
     {
         $role_id = Role::where('code', 'сourier')->first()->id;
+        $fine_id = Fine::where('description', 'Без штрафов')->first()->id;
+        $status_id = Status::where('code', 'active')->first()->id;
         $validated = $request->validated();
-        $user = User::create([... $validated, 'role_id' => $role_id]);
+
+        $user = User::create([
+            ...$validated,
+            'role_id' => $role_id,
+            'fine_id' => $fine_id,
+            'status_id' => $status_id
+        ]);
+
+        try {
+            $this->authorize('register', $request);
+        } catch (AuthorizationException $e) {
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
 
         $user->api_token = Hash::make(Str::random(60));
         $user->save();

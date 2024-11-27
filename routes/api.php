@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\FineController;
 use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\AccesseController;
 use App\Http\Controllers\Api\BonusController;
+use App\Http\Controllers\ConfirmController;
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -25,8 +26,10 @@ Route::middleware('auth:api')->apiResource('bonus', BonusController::class);
 // Доступность
 Route::middleware('auth:api')->apiResource('accesses', AccesseController::class);
 // Смена
-Route::middleware('auth:api')->apiResource('shift',ShiftController::class); //Доработать
+Route::middleware('auth:api')->apiResource('shift',ShiftController::class);
 
+// Подтверждение доступномти
+Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']); // админ
 
 
 

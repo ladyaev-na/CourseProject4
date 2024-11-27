@@ -16,6 +16,6 @@ class ApiRequest extends FormRequest
     //Вызов исключения при провале авторизации
     public function failedAuthorization()
     {
-        throw new ApiException('Ошибка авторизации пользователя', 401);
+        throw new ApiException('Ошибка доступа пользователя', 403);
     }
 }

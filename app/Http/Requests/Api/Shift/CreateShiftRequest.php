@@ -4,9 +4,15 @@ namespace App\Http\Requests\Api\Shift;
 
 use App\Http\Requests\Api\ApiRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CreateShiftRequest extends ApiRequest
 {
+    public function authorize(): bool
+    {
+        return Auth::user()->role->code === 'сourier';
+    }
+
     public function rules(): array
     {
         return [

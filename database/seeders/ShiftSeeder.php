@@ -17,6 +17,7 @@ class ShiftSeeder extends Seeder
             'estimation' => 1,
             'order' => 1,
             'user_id' => 2,
+            'access_id' => 1,
         ]);
     }
 }

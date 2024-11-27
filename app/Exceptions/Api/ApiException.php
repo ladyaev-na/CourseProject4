@@ -18,6 +18,6 @@ class ApiException extends HttpResponseException
             $response['errors'] = $errors;
         }
 
-        parent::__construct( response()->json($response)->setStatusCode($code) );
+        parent::__construct( response()->json($response)->setStatusCode($code));
     }
 }

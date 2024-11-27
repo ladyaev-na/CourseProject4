@@ -7,11 +7,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Accesse\CreateAccesseRequest;
 use App\Http\Requests\Api\Accesse\UpdateAccesseRequest;
 use App\Models\Access;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AccesseController extends Controller
 {
+    use AuthorizesRequests;
+
     public function index(){
         $accesse = Access::all();
 
@@ -33,18 +37,23 @@ class AccesseController extends Controller
     }
 
     public function store(CreateAccesseRequest $request){
-
         $IdUser = Auth::user()->id;
 
-        $accesse = new Access([
+        $access = new Access([
             'date' => $request->input('date'),
             'startChange' => $request->input('startChange'),
             'endChange' => $request->input('endChange'),
             'user_id' => $IdUser,
         ]);
 
-        $accesse->save();
-        return response()->json($accesse)->setStatusCode(200);
+        try {
+            $this->authorize('store', $access);
+        } catch (AuthorizationException $e) {
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
+        $access->save();
+        return response()->json($access)->setStatusCode(200);
     }
 
     public function update(UpdateAccesseRequest $request, $id)
