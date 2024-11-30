@@ -8,12 +8,10 @@ use App\Http\Requests\Api\Fine\CreateFineRequest;
 use App\Http\Requests\Api\Fine\UpdateFineRequest;
 use App\Models\Fine;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FineController extends Controller
 {
-    use AuthorizesRequests;
 
     public function index()
     {
@@ -27,14 +25,12 @@ class FineController extends Controller
     }
     public function store(CreateFineRequest $request)
     {
-        $fine = new Fine($request->all());
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('store', $fine);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $fine = new Fine($request->all());
         $fine->save();
         return response()->json($fine)->setStatusCode(201);
     }
@@ -44,42 +40,37 @@ class FineController extends Controller
         if ($fine){
             return response()->json($fine)->setStatusCode(200, 'Успешно');
         }else{
-            return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
+            return response()->json('Штраф не найден')->setStatusCode(404, 'Не найдено');
         }
     }
     public function update(UpdateFineRequest $request, $id)
     {
-        $fine = Fine::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-
-        try {
-            $this->authorize('update', $fine);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
-
+        $fine = Fine::find($id);
         if ($fine){
             $fine->update($request->all());
             return response()->json($fine)->setStatusCode(200, 'Успешно');
         }else{
-            return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
+            return response()->json('Штраф не найден')->setStatusCode(404, 'Не найдено');
         }
     }
     public function destroy($id)
     {
-        $fine = Fine::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('destroy', $fine);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
+
+        $fine = Fine::find($id);
 
         if (!$fine){
             throw new ApiException(404,'Not Found');
         }
         $fine->delete();
-        return response()->json('зкщашдь удален')->setStatusCode(200);
+        return response()->json('Штраф удален')->setStatusCode(200);
     }
 }

@@ -4,18 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Fine\UpdateFineRequest;
 use App\Http\Requests\Api\Shift\CreateShiftRequest;
 use App\Models\Access;
 use App\Models\Shift;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ShiftController extends Controller
 {
-    use AuthorizesRequests;
     public function index()
     {
         $shift = Shift::all();
@@ -29,26 +25,19 @@ class ShiftController extends Controller
 
     public function store(CreateShiftRequest $request)
     {
-        $idUser = Auth::user()->id;
 
-        $access = Access::where('user_id', $idUser)
-            ->where('startChange', $request->input('startChange'))
-            ->first();
+        if(Auth::user()->role->code != 'сourier'){
 
-        if ($access) {
-            return response()->json(['message' => 'Смена уже закрыта'], 409);
-        }
-
-        try {
-            $this->authorize('store', $request);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $idUser = Auth::user()->id;
+
+        $access = Access::where('user_id', $idUser && 'startChange', $request->input('startChange'))->first();
+
         $shift = new Shift([
             ...$request->validated(),
-            'user_id' => $idUser,
-            'access_id' => $access ? $access->id : null,
+            'access_id' => $access->id,
         ]);
         $shift->save();
 

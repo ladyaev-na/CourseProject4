@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\BonusController;
 use App\Http\Controllers\ConfirmController;
 
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->middleware('auth:api');;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 

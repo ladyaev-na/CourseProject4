@@ -4,17 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\Api\ApiException;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Routing\Controller;
 use App\Http\Requests\Api\Status\CreateStatusRequest;
 use App\Http\Requests\Api\Status\UpdateStatusRequest;
 use App\Models\Status;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 
 class StatusController extends Controller
 {
-    use AuthorizesRequests;
     public function index()
     {
         $status = Status::all();
@@ -27,14 +25,12 @@ class StatusController extends Controller
     }
     public function store(CreateStatusRequest $request)
     {
-        $status = new Status($request->all());
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('store', $status);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $status = new Status($request->all());
         $status->save();
         return response()->json($status)->setStatusCode(201);
     }
@@ -49,16 +45,12 @@ class StatusController extends Controller
     }
     public function update(UpdateStatusRequest $request, $id)
     {
+        if(Auth::user()->role->code != 'admin'){
 
-        $status = Status::find($id);
-
-        try {
-            $this->authorize('update', $status);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
-
+        $status = Status::find($id);
         if ($status){
             $status->update($request->all());
             return response()->json($status)->setStatusCode(200, 'Успешно');
@@ -68,14 +60,12 @@ class StatusController extends Controller
     }
     public function destroy(string $id)
     {
-        $status = Status::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('delete', $status);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $status = Status::find($id);
         if (!$status){
             throw new ApiException(404,'Not Found');
         }

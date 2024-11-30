@@ -33,12 +33,6 @@ class ConfirmController extends Controller
             throw new ApiException(404, 'Not Found');
         }
 
-       /* try {
-            $this->authorize('qwe', $access);
-        } catch (AuthorizationException $e) {
-            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
-        }*/
-
         $access->update([
             'confirm' => $request->input('confirm'),
         ]);

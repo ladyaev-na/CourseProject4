@@ -4,20 +4,22 @@ namespace App\Http\Controllers\Api;
 
 use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\RegisterRequest;
 use App\Http\Requests\Api\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    use AuthorizesRequests;
 
     public function index(){
-        $users = User::all();
 
+        if(Auth::user()->role->code != 'admin'){
+
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
+        $users = User::all();
         return response()->json($users)->setStatusCode(200,'Ок');
     }
     public function show($id)
@@ -45,13 +47,12 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-        $user = User::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('destroy', $user);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
+
+        $user = User::find($id);
 
         if (!$user){
             throw new ApiException(404,'Not Found');

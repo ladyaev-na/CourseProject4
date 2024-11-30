@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use App\Models\User;
-use App\Policies\UserPolicy;
-use Illuminate\Support\ServiceProvider;
-
 class AppServiceProvider extends ServiceProvider
 {
     /**

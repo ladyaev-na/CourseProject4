@@ -8,13 +8,10 @@ use App\Http\Requests\Api\Accesse\CreateAccesseRequest;
 use App\Http\Requests\Api\Accesse\UpdateAccesseRequest;
 use App\Models\Access;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AccesseController extends Controller
 {
-    use AuthorizesRequests;
 
     public function index(){
         $accesse = Access::all();
@@ -37,6 +34,12 @@ class AccesseController extends Controller
     }
 
     public function store(CreateAccesseRequest $request){
+
+        if(Auth::user()->role->code != 'сourier'){
+
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
         $IdUser = Auth::user()->id;
 
         $access = new Access([
@@ -46,18 +49,17 @@ class AccesseController extends Controller
             'user_id' => $IdUser,
         ]);
 
-        try {
-            $this->authorize('store', $access);
-        } catch (AuthorizationException $e) {
-            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
-        }
-
         $access->save();
         return response()->json($access)->setStatusCode(200);
     }
 
     public function update(UpdateAccesseRequest $request, $id)
     {
+        if(Auth::user()->role->code != 'сourier'){
+
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
         $accesse = Access::find($id);
 
         if ($accesse){
@@ -70,6 +72,11 @@ class AccesseController extends Controller
 
     public function destroy($id)
     {
+        if(Auth::user()->role->code != 'сourier'){
+
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
         $accesse = Access::find($id);
         if (!$accesse){
             throw new ApiException(404,'Not Found');

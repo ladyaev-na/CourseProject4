@@ -8,12 +8,10 @@ use App\Http\Requests\Api\Bonus\CreateBonusRequest;
 use App\Http\Requests\Api\Bonus\UpdateBonusRequest;
 use App\Models\Bonus;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BonusController extends Controller
 {
-    use AuthorizesRequests;
     public function index()
     {
         $bonus = Bonus::all();
@@ -26,14 +24,12 @@ class BonusController extends Controller
     }
     public function store(CreateBonusRequest $request)
     {
-        $bonus = new Bonus($request->all());
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('store', $bonus);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $bonus = new Bonus($request->all());
         $bonus->save();
         return response()->json($bonus)->setStatusCode(201);
     }
@@ -48,15 +44,12 @@ class BonusController extends Controller
     }
     public function update(UpdateBonusRequest $request, $id)
     {
-        $bonus = Bonus::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('update', $bonus);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
-
+        $bonus = Bonus::find($id);
         if ($bonus){
             $bonus->update($request->all());
             return response()->json($bonus)->setStatusCode(200, 'Успешно');
@@ -66,14 +59,12 @@ class BonusController extends Controller
     }
     public function destroy($id)
     {
-        $bonus = Bonus::find($id);
+        if(Auth::user()->role->code != 'admin'){
 
-        try {
-            $this->authorize('delete', $bonus);
-        } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
+        $bonus = Bonus::find($id);
         if (!$bonus){
             throw new ApiException(404,'Not Found');
         }

@@ -10,7 +10,6 @@ use App\Models\Role;
 use App\Models\Status;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -18,10 +17,13 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    use AuthorizesRequests;
-
     public function register(RegisterRequest $request)
     {
+         if(Auth::user()->role->code != 'admin'){
+
+             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+         }
+
         $role_id = Role::where('code', 'сourier')->first()->id;
         $fine_id = Fine::where('description', 'Без штрафов')->first()->id;
         $status_id = Status::where('code', 'active')->first()->id;
@@ -33,12 +35,6 @@ class AuthController extends Controller
             'fine_id' => $fine_id,
             'status_id' => $status_id
         ]);
-
-        try {
-            $this->authorize('register', $user);
-        } catch (AuthorizationException $e) {
-            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
-        }
 
         $user->api_token = Hash::make(Str::random(60));
         $user->save();

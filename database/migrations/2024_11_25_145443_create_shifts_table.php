@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('estimation')->nullable();
             $table->integer('order');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('access_id')->constrained();
             $table->timestamps();
         });
