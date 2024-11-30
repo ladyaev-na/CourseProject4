@@ -16,7 +16,7 @@ class RegisterRequest extends ApiRequest
             'name' => 'required|string|max:64|min:3',
             'surname' => 'required|string|max:64|min:3',
             'patronymic' => 'nullable|string|max:64|min:3',
-            'login' => 'required|string|max:64|unique:users',
+            'login' => 'required|string|max:64|unique:users,login,',
             'password' => 'required|string|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'
         ];
     }
@@ -29,10 +29,10 @@ class RegisterRequest extends ApiRequest
 
             'surname.required' => 'Поле "Фамилия" обязательно для заполнения.',
             'surname.max' => 'Поле "Фамилия" не должно превышать 64 символа.',
-            'surname.min' => 'Поле "Имя" не должно быть меньше 3 символов.',
+            'surname.min' => 'Поле "Фамилия" не должно быть меньше 3 символов.',
 
             'patronymic.max' => 'Поле "Отчество" не должно превышать 64 символа.',
-            'patronymic.min' => 'Поле "Имя" не должно быть меньше 3 символов.',
+            'patronymic.min' => 'Поле "Отчество" не должно быть меньше 3 символов.',
 
             'login.required' => 'Поле "Логин" обязательно для заполнения.',
             'login.max' => 'Поле "Логин" не должно превышать 64 символа.',

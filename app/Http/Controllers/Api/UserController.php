@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Exceptions\Api\ApiException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\RegisterRequest;
+use App\Http\Requests\Api\UserUpdateRequest;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -30,7 +31,7 @@ class UserController extends Controller
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
     }
-    public function update(RegisterRequest $request, $id, User $user){
+    public function update(UserUpdateRequest $request, $id, User $user){
 
         $user = User::find($id);
 
