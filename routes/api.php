@@ -29,7 +29,7 @@ Route::middleware('auth:api')->apiResource('accesses', AccesseController::class)
 Route::middleware('auth:api')->apiResource('shift',ShiftController::class);
 
 // Подтверждение доступномти
-Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']); // админ
+Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);
 
 
 

@@ -10,7 +10,7 @@ class CreateShiftRequest extends ApiRequest
 {
     public function authorize(): bool
     {
-        return Auth::user()->role->code === 'сourier';
+        return true;
     }
 
     public function rules(): array

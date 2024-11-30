@@ -71,7 +71,7 @@ class StatusController extends Controller
         $status = Status::find($id);
 
         try {
-            $this->authorize('destroy', $status);
+            $this->authorize('delete', $status);
         } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }

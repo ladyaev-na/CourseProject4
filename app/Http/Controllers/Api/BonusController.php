@@ -69,7 +69,7 @@ class BonusController extends Controller
         $bonus = Bonus::find($id);
 
         try {
-            $this->authorize('destroy', $bonus);
+            $this->authorize('delete', $bonus);
         } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }

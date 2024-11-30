@@ -27,25 +27,31 @@ class ShiftController extends Controller
         return response()->json($shift)->setStatusCode(200);
     }
 
-    public function store(CreateShiftRequest $request){
+    public function store(CreateShiftRequest $request)
+    {
+        $idUser = Auth::user()->id;
 
-            $idUser = Auth::user()->id;
-            $access =  Access::
-            where('user_id', $idUser)
-                ->where('startChange', $request->input('startChange'))
-                ->first()->id;
+        $access = Access::where('user_id', $idUser)
+            ->where('startChange', $request->input('startChange'))
+            ->first();
 
-            if ($access) {
-                return response()->json(['message' => 'Смена уже закрыта'], 409);
-            }
+        if ($access) {
+            return response()->json(['message' => 'Смена уже закрыта'], 409);
+        }
 
-            $shift = new Shift([
-                ...$request->validated(),
-                'user_id' => $idUser,
-                'access_id' => $access,
-            ]);
+        try {
+            $this->authorize('store', $request);
+        } catch (AuthorizationException $e) {
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
 
-            $shift->save();
-            return response()->json($shift)->setStatusCode(200);
+        $shift = new Shift([
+            ...$request->validated(),
+            'user_id' => $idUser,
+            'access_id' => $access ? $access->id : null,
+        ]);
+        $shift->save();
+
+        return response()->json($shift)->setStatusCode(200);
     }
 }

@@ -7,6 +7,7 @@ use App\Models\Access;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class ConfirmController extends Controller
@@ -15,6 +16,10 @@ class ConfirmController extends Controller
 
     public function confirm(Request $request, $id)
     {
+        if (Auth::user()->role->code !== 'admin'){
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
         $validator = Validator::make($request->all(), [
             'confirm' => 'required|boolean',
         ]);
@@ -29,8 +34,8 @@ class ConfirmController extends Controller
             throw new ApiException(404, 'Not Found');
         }
 
-      /*  try {
-            $this->authorize('confirm', $access);
+       /* try {
+            $this->authorize('qwe', $access);
         } catch (AuthorizationException $e) {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }*/
