@@ -34,12 +34,6 @@ class AuthController extends Controller
             'status_id' => $status_id
         ]);
 
-        try {
-            $this->authorize('register', $request);
-        } catch (AuthorizationException $e) {
-            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
-        }
-
         $user->api_token = Hash::make(Str::random(60));
         $user->save();
 

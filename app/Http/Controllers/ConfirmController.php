@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ConfirmController extends Controller
 {
-    use AuthorizesRequests;
 
     public function confirm(Request $request, $id)
     {
