@@ -16,9 +16,8 @@ class UserController extends Controller
     use AuthorizesRequests;
 
     public function index(){
-        $users = User::all();
-
-        return response()->json($users)->setStatusCode(200,'Ок');
+        $couriers = User::where('role_id', 2)->get(); // Предполагаем, что role_id=2 это курьер
+        return response()->json($couriers)->setStatusCode(200, 'Ок');
     }
     public function show($id)
     {
