@@ -13,14 +13,8 @@ class UserController extends Controller
 {
 
     public function index(){
-
-        if(Auth::user()->role->code != 'admin'){
-
-            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
-        }
-
-        $couriers = User::where('role_id', 2)->get(); // Предполагаем, что role_id=2 это курьер
-        return response()->json($couriers)->setStatusCode(200, 'Ок');
+        $users = User::all();
+        return response()->json($users)->setStatusCode(200, 'Ок');
     }
     public function show($id)
     {
@@ -34,12 +28,10 @@ class UserController extends Controller
         }
     }
     public function update(UserUpdateRequest $request, $id, User $user){
-
         $user = User::find($id);
 
-
         if ($user){
-            $user->update($request->all());
+            $user->update($request->validated());
             return response()->json($user)->setStatusCode(200, 'Успешно');
         }else{
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
