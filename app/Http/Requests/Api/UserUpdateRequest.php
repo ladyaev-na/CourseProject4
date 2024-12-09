@@ -17,7 +17,9 @@ class UserUpdateRequest extends ApiRequest
             'surname' => 'string|max:64|min:3',
             'patronymic' => 'nullable|string|max:64|min:3',
             'login' => 'string|max:64|unique:users,login,' . $this->route('id'),
-            'password' => 'string|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'
+            'password' => 'string|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+            'fine_id' => 'integer|exists:fines,id',
+            'status_id' => 'integer|exists:statuses,id',
         ];
     }
 
@@ -37,6 +39,8 @@ class UserUpdateRequest extends ApiRequest
 
             'password.max' => 'Поле "Пароль" не должно превышать 64 символа.',
             'password.regex' => 'Пароль должен содержать как минимум одну заглавную букву, одну строчную букву, одну цифру и один специальный символ (@$!%*?&).',
+
+
         ];
     }
 }
