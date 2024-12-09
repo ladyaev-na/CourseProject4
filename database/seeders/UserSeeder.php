@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             'fine_id' => 1,
             'status_id' => 1,
         ]);
-/*
+
         User::create([
             'surname' => 'Иванов',
             'name' => 'Иван',
@@ -42,6 +42,8 @@ class UserSeeder extends Seeder
             'password' => 'Qwerty123!',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
 
         User::create([
@@ -52,6 +54,8 @@ class UserSeeder extends Seeder
             'password' => 'PetrP@ssw0rd',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
 
         User::create([
@@ -62,6 +66,8 @@ class UserSeeder extends Seeder
             'password' => 'AnnaS123#',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
 
         User::create([
@@ -72,6 +78,8 @@ class UserSeeder extends Seeder
             'password' => 'DmitryK@123',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
 
         ]);
 
@@ -83,6 +91,8 @@ class UserSeeder extends Seeder
             'password' => 'ElenaS!23',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
 
         User::create([
@@ -93,6 +103,8 @@ class UserSeeder extends Seeder
             'password' => 'AlexF#123',
             'api_token' => null,
             'role_id' => 3,
+            'fine_id' => 1,
+            'status_id' => 1,
         ]);
 
         User::create([
@@ -103,6 +115,8 @@ class UserSeeder extends Seeder
             'password' => 'OlgaN@123',
             'api_token' => null,
             'role_id' => 3,
-        ]);*/
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
     }
 }
