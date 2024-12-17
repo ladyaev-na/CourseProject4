@@ -9,18 +9,25 @@ use App\Http\Requests\Api\Accesse\UpdateAccesseRequest;
 use App\Models\Access;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AccesseController extends Controller
 {
 
-    public function index(){
-        $accesse = Access::all();
+    public function index()
+    {
+        // Определяем диапазон дат
+        $startDate = Carbon::now()->subWeeks(2)->startOfDay(); // Две недели назад
+        $endDate = Carbon::now()->addWeeks(2)->endOfDay();    // Две недели вперед
 
-        if (!$accesse){
-            throw new ApiException(404,'Font Found');
+        // Фильтруем доступности по диапазону дат
+        $accesses = Access::whereBetween('date', [$startDate, $endDate])->get();
+
+        if ($accesses->isEmpty()) {
+            return response()->json(['message' => 'Доступности не найдены'], 404);
         }
 
-        return response()->json($accesse)->setStatusCode(200);
+        return response()->json($accesses)->setStatusCode(200);
     }
 
     public function show($id)
