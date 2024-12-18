@@ -15,28 +15,51 @@ class ConfirmController extends Controller
 
     public function confirm(Request $request, $id)
     {
-        if (Auth::user()->role->code !== 'admin'){
+        // Проверка прав доступа
+        if (Auth::user()->role->code !== 'admin') {
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
 
-        $validator = Validator::make($request->all(), [
-            'confirm' => 'required|boolean',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
+        // Поиск записи по ID
         $access = Access::find($id);
 
         if (!$access) {
-            throw new ApiException(404, 'Not Found');
+            return response()->json(['message' => 'Доступность не найдена'], 404);
         }
 
+        // Обновляем значение confirm на true
         $access->update([
-            'confirm' => $request->input('confirm'),
+            'confirm' => true,
         ]);
 
-        return response()->json($access);
+        return response()->json([
+            'message' => 'Доступность успешно подтверждена',
+            'access' => $access,
+        ]);
+    }
+
+    public function cancel(Request $request, $id)
+    {
+        // Проверка роли пользователя
+        if (Auth::user()->role->code !== 'admin') {
+            return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
+        }
+
+        // Поиск записи по ID
+        $access = Access::find($id);
+
+        if (!$access) {
+            return response()->json(['message' => 'Доступность не найдена'], 404);
+        }
+
+        // Логика отмены (сбрасываем подтверждение)
+        $access->update([
+            'confirm' => false, // Отменяем подтверждение
+        ]);
+
+        return response()->json([
+            'message' => 'Доступность успешно отменена',
+            'access' => $access,
+        ]);
     }
 }

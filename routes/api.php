@@ -28,8 +28,10 @@ Route::middleware('auth:api')->apiResource('accesses', AccesseController::class)
 // Смена
 Route::middleware('auth:api')->apiResource('shift',ShiftController::class);
 
-// Подтверждение доступномти
+// Подтверждение доступности
 Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);
+// Отмена доступности
+Route::middleware('auth:api')->patch('/accesses-cancel/{id}', [ConfirmController::class, 'cancel']);
 
 
 
