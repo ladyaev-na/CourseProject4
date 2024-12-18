@@ -65,6 +65,8 @@ class BonusController extends Controller
         }
 
         $bonus = Bonus::find($id);
+
+
         if (!$bonus){
             throw new ApiException(404,'Not Found');
         }

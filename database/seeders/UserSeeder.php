@@ -35,62 +35,62 @@ class UserSeeder extends Seeder
         ]);
 
         User::create([
-            'surname' => 'Иванов',
-            'name' => 'Иван',
-            'patronymic' => 'Иванович',
-            'login' => 'Ivanov',
-            'password' => 'Qwerty123!',
-            'api_token' => null,
-            'role_id' => 3,
-            'fine_id' => 1,
-            'status_id' => 1,
-        ]);
-
-        User::create([
-            'surname' => 'Петров',
-            'name' => 'Петр',
-            'patronymic' => 'Петрович',
-            'login' => 'Petrov',
-            'password' => 'PetrP@ssw0rd',
-            'api_token' => null,
-            'role_id' => 3,
-            'fine_id' => 1,
-            'status_id' => 1,
-        ]);
-
-        User::create([
-            'surname' => 'Сидорова',
-            'name' => 'Анна',
-            'patronymic' => 'Александровна',
-            'login' => 'AnnaS',
-            'password' => 'AnnaS123#',
-            'api_token' => null,
-            'role_id' => 3,
-            'fine_id' => 1,
-            'status_id' => 1,
-        ]);
-
-        User::create([
-            'surname' => 'Кузнецов',
+            'surname' => 'Евсеев',
             'name' => 'Дмитрий',
-            'patronymic' => 'Дмитриевич',
-            'login' => 'DmitryK',
-            'password' => 'DmitryK@123',
+            'patronymic' => 'Витальевич',
+            'login' => 'Evseev',
+            'password' => 'QWEqwe123@',
             'api_token' => null,
-            'role_id' => 3,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+
+        User::create([
+            'surname' => 'Бондаренко',
+            'name' => 'Кирилл',
+            'patronymic' => 'Владимирович',
+            'login' => 'Bonbon',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+
+        User::create([
+            'surname' => 'Ридт',
+            'name' => 'Денис',
+            'patronymic' => 'Александрович',
+            'login' => 'Ridt',
+            'password' => 'QWEqwe123@#',
+            'api_token' => null,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+
+        User::create([
+            'surname' => 'Мотов',
+            'name' => 'Алибала',
+            'patronymic' => 'Эльманович',
+            'login' => 'Motov',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
             'fine_id' => 1,
             'status_id' => 1,
 
         ]);
 
         User::create([
-            'surname' => 'Смирнова',
-            'name' => 'Елена',
-            'patronymic' => 'Ивановна',
-            'login' => 'ElenaS',
-            'password' => 'ElenaS!23',
+            'surname' => 'Стреколовский',
+            'name' => 'Артём',
+            'patronymic' => 'Витальевич',
+            'login' => 'Strekolovskiy',
+            'password' => 'QWEqwe123@',
             'api_token' => null,
-            'role_id' => 3,
+            'role_id' => 2,
             'fine_id' => 1,
             'status_id' => 1,
         ]);
@@ -100,21 +100,65 @@ class UserSeeder extends Seeder
             'name' => 'Алексей',
             'patronymic' => 'Алексеевич',
             'login' => 'AlexF',
-            'password' => 'AlexF#123',
+            'password' => 'QWEqwe123@',
             'api_token' => null,
-            'role_id' => 3,
+            'role_id' => 2,
             'fine_id' => 1,
             'status_id' => 1,
         ]);
 
         User::create([
-            'surname' => 'Николаева',
-            'name' => 'Ольга',
-            'patronymic' => 'Николаевна',
-            'login' => 'OlgaN',
-            'password' => 'OlgaN@123',
+            'surname' => 'Окулов',
+            'name' => 'Семён',
+            'patronymic' => 'Михайлович',
+            'login' => 'Okulov',
+            'password' => 'QWEqwe123@',
             'api_token' => null,
-            'role_id' => 3,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+        User::create([
+            'surname' => 'Заикин',
+            'name' => 'Вадим',
+            'patronymic' => 'Анатольевич',
+            'login' => 'Zaikin',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+        User::create([
+            'surname' => 'Матохнюк',
+            'name' => 'Александр',
+            'patronymic' => 'Александрович',
+            'login' => 'Matohnyuk',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+        User::create([
+            'surname' => 'Волков',
+            'name' => 'Дмитрий',
+            'patronymic' => 'Павлович',
+            'login' => 'Volkov',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
+            'fine_id' => 1,
+            'status_id' => 1,
+        ]);
+        User::create([
+            'surname' => 'Шейкина',
+            'name' => 'Елизавета',
+            'patronymic' => 'Викторовна',
+            'login' => 'Sheykina',
+            'password' => 'QWEqwe123@',
+            'api_token' => null,
+            'role_id' => 2,
             'fine_id' => 1,
             'status_id' => 1,
         ]);
