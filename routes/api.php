@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\AccesseController;
 use App\Http\Controllers\Api\BonusController;
 use App\Http\Controllers\ConfirmController;
 
-
 Route::post('/register', [AuthController::class, 'register'])->middleware('auth:api');;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
@@ -32,7 +31,7 @@ Route::middleware('auth:api')->apiResource('shift',ShiftController::class);
 Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);
 // Отмена доступности
 Route::middleware('auth:api')->patch('/accesses-cancel/{id}', [ConfirmController::class, 'cancel']);
-
-
-
-
+// Частичное подтверждение доступности
+Route::middleware('auth:api')->post('/accesses-partial-confirm/{id}', [ConfirmController::class, 'partialConfirm']);
+// Частичная отмена доступности
+Route::middleware('auth:api')->post('/accesses-partial-cancel/{id}', [ConfirmController::class, 'partialCancel']);
