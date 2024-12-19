@@ -93,6 +93,11 @@ class ConfirmController extends Controller
             return response()->json(['message' => 'Доступность не найдена'], 404);
         }
 
+        // Проверяем, что запись ещё не подтверждена
+        if ($access->confirm) {
+            return response()->json(['message' => 'Нельзя подтвердить уже подтверждённую запись'], 422);
+        }
+
         // Получаем временные интервалы из запроса
         $startTime = $request->input('startChange') . ':00:00';
         $endTime = $request->input('endChange') . ':00:00';
@@ -137,6 +142,11 @@ class ConfirmController extends Controller
 
         if (!$access) {
             return response()->json(['message' => 'Доступность не найдена'], 404);
+        }
+
+        // Проверяем, что запись ещё не отменена
+        if (!$access->confirm) {
+            return response()->json(['message' => 'Нельзя отменить уже неподтверждённую запись'], 422);
         }
 
         // Получаем временные интервалы из запроса
