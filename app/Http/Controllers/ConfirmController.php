@@ -107,16 +107,46 @@ class ConfirmController extends Controller
             return response()->json(['message' => 'Выбранный интервал выходит за пределы текущей доступности'], 422);
         }
 
-        // Обновляем статус текущей записи на подтверждённый
-        $access->confirm = true;
-        $access->save();
+        // Создаем новую запись с подтверждённым статусом
+        $newAccess = $access->replicate();
+        $newAccess->startChange = $startTime;
+        $newAccess->endChange = $endTime;
+        $newAccess->confirm = true;
+        $newAccess->save();
+
+        // Обновляем исходную запись, чтобы отразить оставшуюся часть доступности
+        if ($startTime == $access->startChange && $endTime == $access->endChange) {
+            // Если выбран полный интервал, удаляем исходную запись
+            $access->delete();
+        } elseif ($startTime == $access->startChange) {
+            // Если начало совпадает, обновляем только конец
+            $access->startChange = $endTime;
+            $access->save();
+        } elseif ($endTime == $access->endChange) {
+            // Если конец совпадает, обновляем только начало
+            $access->endChange = $startTime;
+            $access->save();
+        } else {
+            // Если выбранный интервал находится в середине, создаем две новые записи
+            $firstPart = $access->replicate();
+            $firstPart->endChange = $startTime;
+            $firstPart->save();
+
+            $secondPart = $access->replicate();
+            $secondPart->startChange = $endTime;
+            $secondPart->save();
+
+            // Удаляем исходную запись
+            $access->delete();
+        }
 
         // Объединяем соседние записи
-        $this->mergeAdjacentAccesses($access);
+        $this->mergeAdjacentAccesses($newAccess);
 
         return response()->json([
             'message' => 'Доступность успешно частично подтверждена',
-            'updated_access' => $access,
+            'new_access' => $newAccess,
+            'updated_access' => $access ?: null, // Возвращаем null, если исходная запись была удалена
         ]);
     }
 
