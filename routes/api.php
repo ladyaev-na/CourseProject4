@@ -24,8 +24,7 @@ Route::middleware('auth:api')->apiResource('status',StatusController::class);
 Route::middleware('auth:api')->apiResource('bonus', BonusController::class);
 // Доступность
 Route::middleware('auth:api')->apiResource('accesses', AccesseController::class);
-// Смена
-Route::middleware('auth:api')->apiResource('shift',ShiftController::class);
+
 
 // Подтверждение доступности
 Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);

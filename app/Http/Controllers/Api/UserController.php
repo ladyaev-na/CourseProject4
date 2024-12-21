@@ -55,4 +55,5 @@ class UserController extends Controller
         $user->delete();
         return response()->json('Пользователь удален')->setStatusCode(200);
     }
+
 }
