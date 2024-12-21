@@ -47,7 +47,7 @@ class AccesseController extends Controller
             return response()->json(['message' => 'Доступности не найдены'], 404);
         }
 
-        return response()->json($accesses, 200);
+        return response()->json($accesses)->setStatusCode(200);
     }
 
     public function show($id)
