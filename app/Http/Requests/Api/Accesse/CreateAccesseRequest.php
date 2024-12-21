@@ -15,8 +15,8 @@ class CreateAccesseRequest extends ApiRequest
     {
         return [
             'date' => 'required|date',
-            'startChange' => 'required|date_format:H',
-            'endChange' => 'required|date_format:H',
+            'startChange' => 'required',
+            'endChange' => 'required',
         ];
     }
     public function messages(): array
