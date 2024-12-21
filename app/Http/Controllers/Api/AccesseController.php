@@ -29,6 +29,26 @@ class AccesseController extends Controller
 
         return response()->json($accesses)->setStatusCode(200);
     }
+    public function indexCourier()
+    {
+        // Получаем ID текущего пользователя
+        $userId = Auth::id();
+
+        // Определяем диапазон дат
+        $startDate = Carbon::now()->subWeeks(2)->startOfDay(); // Две недели назад
+        $endDate = Carbon::now()->addWeeks(2)->endOfDay();    // Две недели вперед
+
+        // Фильтруем доступности текущего пользователя по диапазону дат
+        $accesses = Access::where('user_id', $userId)
+            ->whereBetween('date', [$startDate, $endDate])
+            ->get();
+
+        if ($accesses->isEmpty()) {
+            return response()->json(['message' => 'Доступности не найдены'], 404);
+        }
+
+        return response()->json($accesses, 200);
+    }
 
     public function show($id)
     {
