@@ -23,8 +23,8 @@ Route::middleware('auth:api')->apiResource('status',StatusController::class);
 // Бонусы
 Route::middleware('auth:api')->apiResource('bonus', BonusController::class);
 // Доступность
+Route::middleware('auth:api')->get('/accesses/my', [AccesseController::class, 'indexCourier']);
 Route::middleware('auth:api')->apiResource('accesses', AccesseController::class);
-
 
 // Подтверждение доступности
 Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);
