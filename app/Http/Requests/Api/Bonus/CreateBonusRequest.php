@@ -17,6 +17,7 @@ class CreateBonusRequest extends ApiRequest
             'title' => 'required|string|max:64',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
+            'role_id' => 'required|integer|exists:roles,id',
         ];
     }
     public function messages(): array {
@@ -26,9 +27,11 @@ class CreateBonusRequest extends ApiRequest
 
             'description.required' => 'Описание бонуса не должен быть пустым',
 
-            'price.required' => 'Описание бонуса не должен быть пустым',
+            'price.required' => 'Цена бонуса не должна быть пустой',
             'price.numeric' => 'Цена бонуса должна быть числом',
             'price.min' => 'Вознаграждение от бонуса не должно быть 0',
+
+            'role_id' => 'Роль должна быть выбрана'
         ];
     }
 }
