@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('title',64);
             $table->string('description');
             $table->decimal('price', 12,2);
+            $table->foreignId('role_id')->constrained();
             $table->timestamps();
         });
     }

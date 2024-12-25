@@ -11,8 +11,7 @@ class Role extends Model
     public function users(){
         return $this->hasMany(User::class);
     }
-    public function bonus()
-    {
-        return $this->belongsTo(Bonus::class);
+    public function bonuses(){
+        return $this->hasMany(Bonus::class);
     }
 }

@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FineSeeder::class,
             StatusSeeder::class,
-            BonusSeeder::class,
             RoleSeeder::class,
+            BonusSeeder::class,
             UserSeeder::class,
             AccessSeeder::class,
             ShiftSeeder::class,
