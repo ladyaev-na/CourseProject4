@@ -18,7 +18,7 @@ class BonusController extends Controller
         $bonuses = Bonus::with('role')->get();
 
         if ($bonuses->isEmpty()) {
-            throw new ApiException(404, 'Not Found');
+            throw new ApiException( 'Не найдено', 404);
         }
 
         return response()->json($bonuses)->setStatusCode(200);
@@ -71,7 +71,7 @@ class BonusController extends Controller
 
 
         if (!$bonus){
-            throw new ApiException(404,'Not Found');
+            throw new ApiException('Не найдено', 404);
         }
         $bonus->delete();
         return response()->json('Бонус удален')->setStatusCode(200);

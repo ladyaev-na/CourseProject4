@@ -18,7 +18,7 @@ class StatusController extends Controller
         $status = Status::all();
 
         if (!$status){
-            throw new ApiException(404,'Font Found');
+            throw new ApiException('Не найдено', 404);
         }
 
         return response()->json($status)->setStatusCode(200);
@@ -67,7 +67,7 @@ class StatusController extends Controller
 
         $status = Status::find($id);
         if (!$status){
-            throw new ApiException(404,'Not Found');
+            throw new ApiException('Не найдено', 404);
         }
         $status->delete();
         return response()->json('Статус удален')->setStatusCode(200);

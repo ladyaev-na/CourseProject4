@@ -17,7 +17,7 @@ class ShiftController extends Controller
         $shift = Shift::all();
 
         if (!$shift){
-            throw new ApiException(404,'Font Found');
+            throw new ApiException('Не найдено', 404);
         }
 
         return response()->json($shift)->setStatusCode(200);

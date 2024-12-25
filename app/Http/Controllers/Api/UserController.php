@@ -50,7 +50,7 @@ class UserController extends Controller
         $user = User::find($id);
 
         if (!$user){
-            throw new ApiException(404,'Not Found');
+            throw new ApiException('Не найдено', 404);
         }
         $user->delete();
         return response()->json('Пользователь удален')->setStatusCode(200);

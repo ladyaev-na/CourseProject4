@@ -106,7 +106,7 @@ class AccesseController extends Controller
 
         $accesse = Access::find($id);
         if (!$accesse){
-            throw new ApiException(404,'Not Found');
+            throw new ApiException('Не найдено', 404);
         }
         $accesse->delete();
         return response()->json('Доступность удалена')->setStatusCode(200);

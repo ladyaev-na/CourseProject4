@@ -18,7 +18,7 @@ class FineController extends Controller
         $fine = Fine::all();
 
         if (!$fine){
-            throw new ApiException(404,'Font Found');
+            throw new ApiException('Не найдено', 404);
         }
 
         return response()->json($fine)->setStatusCode(200);
@@ -68,7 +68,7 @@ class FineController extends Controller
         $fine = Fine::find($id);
 
         if (!$fine){
-            throw new ApiException(404,'Not Found');
+            throw new ApiException('Не найдено', 404);
         }
         $fine->delete();
         return response()->json('Штраф удален')->setStatusCode(200);
