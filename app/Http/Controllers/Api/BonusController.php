@@ -14,13 +14,14 @@ class BonusController extends Controller
 {
     public function index()
     {
-        $bonus = Bonus::all();
+        // Загружаем бонусы вместе с их ролями
+        $bonuses = Bonus::with('role')->get();
 
-        if (!$bonus){
-            throw new ApiException(404,'Font Found');
+        if ($bonuses->isEmpty()) {
+            throw new ApiException(404, 'Not Found');
         }
 
-        return response()->json($bonus)->setStatusCode(200);
+        return response()->json($bonuses)->setStatusCode(200);
     }
     public function store(CreateBonusRequest $request)
     {
@@ -35,10 +36,12 @@ class BonusController extends Controller
     }
     public function show($id)
     {
-        $bonus = Bonus::find($id);
-        if ($bonus){
+        // Загружаем бонус вместе с его ролью
+        $bonus = Bonus::with('role')->find($id);
+
+        if ($bonus) {
             return response()->json($bonus)->setStatusCode(200, 'Успешно');
-        }else{
+        } else {
             return response()->json('Бонус не найден')->setStatusCode(404, 'Не найдено');
         }
     }
