@@ -15,8 +15,8 @@ class CreateAccesseRequest extends ApiRequest
     {
         return [
             'date' => 'required|date',
-            'startChange' => 'required',
-            'endChange' => 'required',
+            'startChange' => 'required|date_format:H:i',
+            'endChange' => 'required|date_format:H:i',
         ];
     }
     public function messages(): array
@@ -25,10 +25,7 @@ class CreateAccesseRequest extends ApiRequest
             'date.required' => 'Пожалуйста, укажите дату.',
             'date.date' => 'Дата должна быть в формате ГГГГ-ММ-ДД.',
             'startChange.required' => 'Пожалуйста, укажите время начала смены.',
-            'startChange.date_format' => 'Время начала смены должно быть в формате ЧЧ.',
             'endChange.required' => 'Пожалуйста, укажите время окончания смены.',
-            'endChange.date_format' => 'Время окончания смены должно быть в формате ЧЧ.',
-
         ];
     }
 }
