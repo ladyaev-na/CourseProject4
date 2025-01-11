@@ -14,8 +14,8 @@ class UpdateAccesseRequest extends ApiRequest
     {
         return [
             'date' => 'date',
-            'startChange' => 'date_format:H',
-            'endChange' => 'date_format:H',
+            'startChange' => 'date_format:H:i',
+            'endChange' => 'date_format:H:i',
         ];
     }
     public function messages(): array

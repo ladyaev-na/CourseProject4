@@ -35,7 +35,7 @@ class UserController extends Controller
 
         if ($user){
             $user->update($request->all());
-            return response()->json($user)->setStatusCode(200, 'Успешно');
+            return response()->json($user)->setStatusCode(200, 'Ok');
         }else{
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }

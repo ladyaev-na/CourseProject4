@@ -43,21 +43,14 @@ class AccesseController extends Controller
             ->whereBetween('date', [$startDate, $endDate])
             ->get();
 
-        if ($accesses->isEmpty()) {
-            return response()->json(['message' => 'Доступности не найдены'], 404);
-        }
-
-        return response()->json($accesses)->setStatusCode(200);
+        return response()->json($accesses);
     }
+
 
     public function show($id)
     {
-        $accesse = Access::find($id);
-        if ($accesse){
-            return response()->json($accesse)->setStatusCode(200, 'Успешно');
-        }else{
-            return response()->json('Доступность не найдена')->setStatusCode(404, 'Не найдено');
-        }
+        $accesses = Access::where('user_id', $id)->get();
+        return response()->json($accesses);
     }
 
     public function store(CreateAccesseRequest $request){
@@ -108,7 +101,12 @@ class AccesseController extends Controller
         if (!$accesse){
             throw new ApiException('Не найдено', 404);
         }
-        $accesse->delete();
-        return response()->json('Доступность удалена')->setStatusCode(200);
+
+        if ($accesse->confirm == 1){
+            return response()->json(['message' => 'Нельзя удалить подтвержденную доступность'], 403);
+        }else{
+            $accesse->delete();
+            return response()->json('Доступность удалена')->setStatusCode(200);
+        }
     }
 }
