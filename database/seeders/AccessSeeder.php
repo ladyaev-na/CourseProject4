@@ -20,12 +20,5 @@ class AccessSeeder extends Seeder
             'confirm' => false,
             'user_id' => 2
         ]);
-        Access::create([
-            'date' => '2024-12-20',
-            'startChange' => '08:00:00',
-            'endChange' => '23:00:00',
-            'confirm' => false,
-            'user_id' => 2
-        ]);
     }
 }

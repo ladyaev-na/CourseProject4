@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             BonusSeeder::class,
             UserSeeder::class,
             AccessSeeder::class,
-            ShiftSeeder::class,
         ]);
     }
 }
