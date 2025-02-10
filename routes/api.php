@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\FineController;
-use App\Http\Controllers\Api\ShiftController;
 use App\Http\Controllers\Api\AccesseController;
 use App\Http\Controllers\Api\BonusController;
 use App\Http\Controllers\ConfirmController;

@@ -11,28 +11,24 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
+    // Метод для просмотра пользователей
     public function index(){
-
         $users = User::all();
         return response()->json($users)->setStatusCode(200,'Ок');
     }
+    // Метод для просмотра конкретного пользователя
     public function show($id)
     {
         $user = User::find($id);
-
-
         if ($user){
             return response()->json($user)->setStatusCode(200, 'Успешно');
         }else{
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
     }
+    // Метод для обновления пользователя
     public function update(UserUpdateRequest $request, $id, User $user){
-
         $user = User::find($id);
-
-
         if ($user){
             $user->update($request->all());
             return response()->json($user)->setStatusCode(200, 'Ok');
@@ -40,20 +36,17 @@ class UserController extends Controller
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Не найдено');
         }
     }
+    // Метод для удаления пользователя
     public function destroy($id)
     {
         if(Auth::user()->role->code != 'admin'){
-
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
-
         $user = User::find($id);
-
         if (!$user){
             throw new ApiException('Не найдено', 404);
         }
         $user->delete();
         return response()->json('Пользователь удален')->setStatusCode(200);
     }
-
 }

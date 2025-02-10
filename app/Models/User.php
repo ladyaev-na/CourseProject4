@@ -14,20 +14,16 @@ class User extends Authenticatable
     protected $fillable = [
         'surname','name','patronymic','login','password','api_token','role_id','fine_id','status_id',
     ];
-
-
     protected $hidden = [
         'password',
         'api_token',
     ];
-
     protected function casts(): array
     {
         return [
             'password' => 'hashed',
         ];
     }
-
     public function role()
     {
         return $this->belongsTo(Role::class);
@@ -36,13 +32,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Fine::class);
     }
-    public function access()
+    public function accesses()
     {
-        return $this->belongsTo(Access::class);
-    }
-    public function shift()
-    {
-        return $this->belongsTo(Shift::class);
+        return $this->hasMany(Access::class);
     }
     public function status()
     {

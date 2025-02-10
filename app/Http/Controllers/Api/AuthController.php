@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    // Метод для регистрации курьеров
     public function register(RegisterRequest $request)
     {
          if(Auth::user()->role->code != 'admin'){
@@ -46,7 +47,7 @@ class AuthController extends Controller
             ]
         )->setStatusCode(201);
     }
-
+    // Метод для входа в систему
     public function login(Request $request){
 
         if (!Auth::attempt($request->only('login', 'password'))) {
@@ -61,7 +62,7 @@ class AuthController extends Controller
             'user' => $user,
         ])->setStatusCode(200);
     }
-
+    // Метод для выхода из системы
     public function logout(){
         $user = Auth::user();
         $user->api_token = null;

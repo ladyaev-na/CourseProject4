@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class AccesseController extends Controller
 {
-
+    // Метод для получения всех доступностей курьеров в пределах двух недель
     public function index()
     {
         // Определяем диапазон дат
@@ -29,6 +29,7 @@ class AccesseController extends Controller
 
         return response()->json($accesses)->setStatusCode(200);
     }
+    // Метод для получения своих выставленных доступностей (используется курьерами)
     public function indexCourier()
     {
         // Получаем ID текущего пользователя
@@ -45,14 +46,18 @@ class AccesseController extends Controller
 
         return response()->json($accesses);
     }
-
-
+    // Метод для просмотра конкретных доступностей
     public function show($id)
     {
-        $accesses = Access::where('user_id', $id)->get();
-        return response()->json($accesses);
-    }
+        $access = Access::find($id);
 
+        if ($access){
+            return response()->json($access)->setStatusCode(200, 'Успешно');
+        }else{
+            return response()->json('Доступность не найдена')->setStatusCode(404, 'Не найдено');
+        }
+    }
+    // Метод для создания доступности (используется курьерами)
     public function store(CreateAccesseRequest $request){
 
         if(Auth::user()->role->code != 'сourier'){
@@ -72,7 +77,7 @@ class AccesseController extends Controller
         $access->save();
         return response()->json($access)->setStatusCode(200);
     }
-
+    // Метод для обновления доступности (используется курьерами)
     public function update(UpdateAccesseRequest $request, $id)
     {
         if(Auth::user()->role->code != 'сourier'){
@@ -89,7 +94,7 @@ class AccesseController extends Controller
             return response()->json('Доступность не найдена')->setStatusCode(404, 'Не найдено');
         }
     }
-
+    // Метод для удаления доступности (используется курьерами)
     public function destroy($id)
     {
         if(Auth::user()->role->code != 'сourier'){

@@ -13,27 +13,26 @@ use Illuminate\Support\Facades\Auth;
 
 class StatusController extends Controller
 {
+    // Метод для просмотра всех статусов
     public function index()
     {
         $status = Status::all();
-
         if (!$status){
             throw new ApiException('Не найдено', 404);
         }
-
         return response()->json($status)->setStatusCode(200);
     }
+    // Метод для создания статусов
     public function store(CreateStatusRequest $request)
     {
         if(Auth::user()->role->code != 'admin'){
-
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
-
         $status = new Status($request->all());
         $status->save();
         return response()->json($status)->setStatusCode(201);
     }
+    // Метод для просмотра конкретного статуса
     public function show($id)
     {
         $status = Status::find($id);
@@ -43,13 +42,12 @@ class StatusController extends Controller
             return response()->json('Статус не найден')->setStatusCode(404, 'Не найдено');
         }
     }
+    // Метод для обновления статуса
     public function update(UpdateStatusRequest $request, $id)
     {
         if(Auth::user()->role->code != 'admin'){
-
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
-
         $status = Status::find($id);
         if ($status){
             $status->update($request->all());
@@ -58,13 +56,12 @@ class StatusController extends Controller
             return response()->json('Статус не найден')->setStatusCode(404, 'Не найдено');
         }
     }
+    // Метод для удаления статусов
     public function destroy(string $id)
     {
         if(Auth::user()->role->code != 'admin'){
-
             return response()->json(['message' => 'У вас нет прав на выполнение этого действия'], 403);
         }
-
         $status = Status::find($id);
         if (!$status){
             throw new ApiException('Не найдено', 404);
