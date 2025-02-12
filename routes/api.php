@@ -9,8 +9,11 @@ use App\Http\Controllers\Api\AccesseController;
 use App\Http\Controllers\Api\BonusController;
 use App\Http\Controllers\ConfirmController;
 
-Route::post('/register', [AuthController::class, 'register'])->middleware('auth:api');;
+// Регистрация пользователя
+Route::post('/register', [AuthController::class, 'register'])->middleware('auth:api');
+// Авторизация
 Route::post('/login', [AuthController::class, 'login']);
+// Выход
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
 
 // Профиль

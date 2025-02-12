@@ -20,7 +20,6 @@ class RegisterRequest extends ApiRequest
             'password' => 'required|string|max:64|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'
         ];
     }
-
     public function messages(): array{
         return [
             'name.required' => 'Поле "Имя" обязательно для заполнения.',

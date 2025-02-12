@@ -22,7 +22,6 @@ class UserUpdateRequest extends FormRequest
             'status_id' => 'integer|exists:statuses,id',
         ];
     }
-
     public function messages(): array{
         return [
             'name.max' => 'Поле "Имя" не должно превышать 64 символа.',
