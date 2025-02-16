@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Api\StatusController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\FineController;
 use App\Http\Controllers\Api\AccesseController;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BonusController;
-use App\Http\Controllers\ConfirmController;
+use App\Http\Controllers\Api\ConfirmController;
+use App\Http\Controllers\Api\FineController;
+use App\Http\Controllers\Api\StatusController;
+use App\Http\Controllers\Api\UserController;
+use Illuminate\Support\Facades\Route;
 
 // Регистрация пользователя
 Route::post('/register', [AuthController::class, 'register'])->middleware('auth:api');
@@ -15,7 +15,6 @@ Route::post('/register', [AuthController::class, 'register'])->middleware('auth:
 Route::post('/login', [AuthController::class, 'login']);
 // Выход
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api');
-
 // Профиль
 Route::middleware('auth:api')->apiResource('profile',UserController::class);
 // Штрафы
@@ -27,7 +26,6 @@ Route::middleware('auth:api')->apiResource('bonus', BonusController::class);
 // Доступность
 Route::middleware('auth:api')->get('/accesses/my', [AccesseController::class, 'indexCourier']);
 Route::middleware('auth:api')->apiResource('accesses', AccesseController::class);
-
 // Подтверждение доступности
 Route::middleware('auth:api')->patch('/accesses-confirm/{id}', [ConfirmController::class, 'confirm']);
 // Отмена доступности
